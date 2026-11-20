@@ -11,7 +11,7 @@ import { slugify } from "@/lib/utils";
 type Result = { ok: true; id: string } | { ok: false; error: string };
 
 const CATEGORY_SLUGS = CATEGORIES.map((c) => c.slug) as string[];
-const COMPLIANCE_SLUGS = ["about", "contact", "privacy-policy", "affiliate-disclosure"];
+const COMPLIANCE_SLUGS = ["about", "contact", "privacy-policy", "affiliate-disclosure", "terms"];
 
 function isHttpUrl(v: string) {
   try {

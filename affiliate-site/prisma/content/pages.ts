@@ -235,4 +235,64 @@ Our content is for general information only and is not financial, legal, tax or 
 
 ${SITE_NAME} is operated by ${OWNER}, ${LOCATION}. If you have questions about this disclosure, please [contact us](/contact).`,
   },
+  {
+    slug: "terms",
+    title: "Terms of Use",
+    metaDescription:
+      "The terms that apply when you use WiseCompare (wisecompareguide.com): information only, affiliate links, third-party sites, intellectual property and liability.",
+    content: `These Terms of Use apply to your use of WiseCompare (${DOMAIN}), operated by **${OWNER}**, ${LOCATION} ("we", "us", "our"). By using this website, you agree to these terms. If you don't agree, please don't use the site.
+
+## 1. Information only, not professional advice
+
+The content on WiseCompare (comparisons, reviews, ratings and guides) is general information to help you compare products and services. It is **not** financial, investment, legal, tax, insurance or other professional advice, and it doesn't take your personal circumstances into account. Before making a decision, read the provider's own terms and, where appropriate, speak to a qualified professional.
+
+## 2. Accuracy and availability
+
+We work hard to keep information accurate and up to date, but prices, features, promotions and terms change frequently and may differ from what we describe. We don't guarantee that the content is complete, current or error-free, and we may change or remove content at any time. Always confirm details on the provider's website before you buy or sign up. If you spot an error, please [contact us](/contact).
+
+## 3. Affiliate links and third-party websites
+
+Some links on this site are affiliate links, which means we may earn a commission if you click them and make a purchase or sign up, at no extra cost to you. See our [Affiliate Disclosure](/affiliate-disclosure) for details.
+
+Links to third-party websites are provided for convenience. We don't control those websites and aren't responsible for their content, products, services, privacy practices or availability. Any purchase or agreement you make with a third party is solely between you and that third party.
+
+## 4. Ratings and opinions
+
+Ratings and verdicts reflect our editorial opinion based on the criteria described on our [About](/about) page at the time of review. Your experience may differ.
+
+## 5. Acceptable use
+
+You agree not to:
+
+- use the site for any unlawful purpose or in breach of these terms;
+- attempt to gain unauthorised access to the site, its servers or administrative areas;
+- interfere with the site's operation, including through malware, scraping that overloads the site, or automated spam submissions;
+- copy or republish substantial parts of our content without permission.
+
+## 6. Intellectual property
+
+The WiseCompare name, logo, website design and original content are owned by us and protected by intellectual property laws. You may view and share links to our pages, and quote short extracts with a link back to the source. Third-party trademarks and product names belong to their respective owners and are used for identification only.
+
+## 7. Your submissions
+
+If you send us a message or sign up for emails, you confirm that the information you provide is accurate and that you're entitled to provide it. We handle personal information as described in our [Privacy & Cookie Policy](/privacy-policy).
+
+## 8. Limitation of liability
+
+To the fullest extent permitted by law, WiseCompare and its team are not liable for any loss or damage arising from your use of, or reliance on, this website or any third-party website, product or service linked from it. Nothing in these terms excludes liability that cannot be excluded under applicable law.
+
+## 9. Changes to these terms
+
+We may update these terms from time to time. The "last updated" date at the top of this page shows when they were last revised. Continuing to use the site means you accept the updated terms.
+
+## 10. Governing law
+
+These terms are governed by the laws of India. Subject to any mandatory consumer protection rights you have in your country of residence, disputes are subject to the jurisdiction of the courts of Hyderabad, Telangana.
+
+## 11. Contact
+
+- **${OWNER}**, WiseCompare
+- ${LOCATION}
+- Email: [${EMAIL}](mailto:${EMAIL})`,
+  },
 ];

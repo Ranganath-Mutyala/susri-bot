@@ -10,7 +10,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     prisma.article.findMany({ where: { status: "published" }, select: { slug: true, updatedAt: true } }),
     prisma.landingPage.findMany({ where: { status: "published" }, select: { slug: true, updatedAt: true } }),
   ]);
-  const staticPaths = ["", "/articles", "/about", "/contact", "/privacy-policy", "/affiliate-disclosure", ...CATEGORIES.map((c) => `/${c.slug}`)];
+  const staticPaths = ["", "/articles", "/about", "/contact", "/privacy-policy", "/affiliate-disclosure", "/terms", ...CATEGORIES.map((c) => `/${c.slug}`)];
   return [
     ...staticPaths.map((p) => ({ url: siteUrl(p || "/") })),
     ...articles.map((a) => ({ url: siteUrl(`/articles/${a.slug}`), lastModified: a.updatedAt })),

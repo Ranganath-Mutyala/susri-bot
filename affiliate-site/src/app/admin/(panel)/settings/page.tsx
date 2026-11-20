@@ -3,7 +3,7 @@ import { getSettings } from "@/lib/settings";
 import { PageHeader } from "@/components/admin/ui";
 import { SettingsForm, CompliancePageForm } from "@/components/admin/SettingsForms";
 
-const ORDER = ["about", "contact", "privacy-policy", "affiliate-disclosure"];
+const ORDER = ["about", "contact", "privacy-policy", "affiliate-disclosure", "terms"];
 
 export default async function SettingsPage() {
   const [s, pages] = await Promise.all([getSettings(), prisma.page.findMany()]);

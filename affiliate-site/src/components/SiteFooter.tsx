@@ -28,6 +28,7 @@ export function SiteFooter({ siteName, footerText }: { siteName: string; footerT
             <li><Link href="/contact" className="hover:text-brand-700">Contact</Link></li>
             <li><Link href="/privacy-policy" className="hover:text-brand-700">Privacy & Cookie Policy</Link></li>
             <li><Link href="/affiliate-disclosure" className="hover:text-brand-700">Affiliate Disclosure</Link></li>
+            <li><Link href="/terms" className="hover:text-brand-700">Terms of Use</Link></li>
           </ul>
         </div>
       </div>

@@ -28,6 +28,7 @@ export default async function OfferLayout({ children }: { children: React.ReactN
             <Link href="/contact" className="hover:underline">Contact</Link>
             <Link href="/privacy-policy" className="hover:underline">Privacy Policy</Link>
             <Link href="/affiliate-disclosure" className="hover:underline">Affiliate Disclosure</Link>
+            <Link href="/terms" className="hover:underline">Terms</Link>
           </nav>
         </div>
       </footer>

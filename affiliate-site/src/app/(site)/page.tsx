@@ -5,6 +5,12 @@ import { getSettings } from "@/lib/settings";
 import { ArticleCard } from "@/components/ArticleCard";
 import { OfferCard } from "@/components/OfferCard";
 
+export const metadata = {
+  description:
+    "Independent, plain-English comparisons and reviews of AI tools, VPNs and software, personal finance tools and home insurance, so you can choose with confidence.",
+  alternates: { canonical: "/" },
+};
+
 const TRUST = [
   { title: "Independent editorial", text: "Ratings are set by our editors using a published methodology — partners can't buy a higher score." },
   { title: "Fees & fine print first", text: "We surface pricing, trial terms, cancellation rules and limitations before the sales pitch." },
