@@ -2,7 +2,7 @@
 // with internal links to each other and to the offer landing pages.
 
 const AUTHOR = {
-  authorName: "ClearCompare Editorial Team",
+  authorName: "WiseCompare Editorial Team",
   authorRole: "Research & Reviews",
   authorBio:
     "Our editorial team researches software, personal finance and home insurance products using a published methodology. We review pricing pages, terms and policy documents directly, and update guides on a regular schedule.",

@@ -2,7 +2,7 @@
 // IMPORTANT: review with your own legal adviser and replace the bracketed
 // placeholders (company name, address, jurisdiction) before running ads.
 
-export const SITE_NAME = "ClearCompare";
+export const SITE_NAME = "WiseCompare";
 
 export const pages = [
   {

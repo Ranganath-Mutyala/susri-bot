@@ -1,4 +1,4 @@
-# ClearCompare: Affiliate Comparison Publication + Admin Panel
+# WiseCompare: Affiliate Comparison Publication + Admin Panel
 
 A Next.js (App Router) + TypeScript + Tailwind + Prisma (SQLite) site for running a multi-niche affiliate comparison publication. It also serves the landing pages for Google Ads traffic. Everything is managed from a password-protected `/admin` panel: offer landing pages, articles, tracking pixels, compliance pages and leads.
 

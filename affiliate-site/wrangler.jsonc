@@ -1,7 +1,7 @@
 // Cloudflare Workers configuration (used by OpenNext + Wrangler).
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "smartpick-site",
+  "name": "wisecompare-site",
   "main": ".open-next/worker.js",
   "compatibility_date": "2026-10-01",
   "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
@@ -15,8 +15,8 @@
   "d1_databases": [
     {
       "binding": "DB",
-      "database_name": "smartpick-db",
-      // Paste the Database ID from Cloudflare dashboard → Storage & Databases → D1 → smartpick-db
+      "database_name": "wisecompare-db",
+      // Paste the Database ID from Cloudflare dashboard → Storage & Databases → D1 → wisecompare-db
       "database_id": "REPLACE_WITH_YOUR_D1_DATABASE_ID",
       "migrations_dir": "migrations"
     }

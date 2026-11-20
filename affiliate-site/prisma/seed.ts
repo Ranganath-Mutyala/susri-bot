@@ -21,7 +21,7 @@ async function main() {
     siteName: SITE_NAME,
     tagline: "Independent comparisons for smarter decisions",
     footerText: `${SITE_NAME} is an independent publication that compares software, financial tools and home insurance options. We may earn a commission from partner links; this never affects our editorial ratings. Content is for general information only and is not financial, legal or insurance advice.`,
-    contactEmail: "hello@example.com",
+    contactEmail: "hello@wisecompareguide.com",
     contactPhone: "",
     contactAddress: "[Your Company Name]\n[Street address]\n[City, State ZIP]",
   };
