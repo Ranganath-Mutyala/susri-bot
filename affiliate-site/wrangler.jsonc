@@ -17,7 +17,7 @@
       "binding": "DB",
       "database_name": "wisecompare-db",
       // Paste the Database ID from Cloudflare dashboard → Storage & Databases → D1 → wisecompare-db
-      "database_id": "REPLACE_WITH_YOUR_D1_DATABASE_ID",
+      "database_id": "c783398e-e0fc-474b-b4e5-ca2c3aa92be0",
       "migrations_dir": "migrations"
     }
   ]
