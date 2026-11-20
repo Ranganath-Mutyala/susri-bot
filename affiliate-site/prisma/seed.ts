@@ -23,7 +23,7 @@ async function main() {
     footerText: `${SITE_NAME} is an independent publication that compares software, financial tools and home insurance options. We may earn a commission from partner links; this never affects our editorial ratings. Content is for general information only and is not financial, legal or insurance advice.`,
     contactEmail: "hello@wisecompareguide.com",
     contactPhone: "",
-    contactAddress: "[Your Company Name]\n[Street address]\n[City, State ZIP]",
+    contactAddress: "Ranganath Mutyala\nHyderabad, Telangana, India",
   };
   await prisma.setting.upsert({ where: { id: 1 }, update: force ? settings : {}, create: { id: 1, ...settings } });
 

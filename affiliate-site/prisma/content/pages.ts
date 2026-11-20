@@ -1,155 +1,188 @@
-// Starter text for the four mandatory compliance pages.
-// IMPORTANT: review with your own legal adviser and replace the bracketed
-// placeholders (company name, address, jurisdiction) before running ads.
+// The four compliance pages (About, Contact, Privacy Policy, Affiliate Disclosure).
+// Editable later in Admin → Settings & Compliance. This text is general information,
+// not legal advice; have it reviewed if your business grows or you form a company.
 
 export const SITE_NAME = "WiseCompare";
+const OWNER = "Ranganath Mutyala";
+const LOCATION = "Hyderabad, Telangana, India";
+const EMAIL = "hello@wisecompareguide.com";
+const DOMAIN = "wisecompareguide.com";
 
 export const pages = [
   {
     slug: "about",
-    title: "About Us & Editorial Standards",
+    title: "About WiseCompare",
     metaDescription:
-      "Who we are, how we research and rate products, and how we keep our recommendations independent from our commercial partnerships.",
-    content: `${SITE_NAME} is an independent comparison publication that helps consumers and small businesses make better decisions about software, personal finance and their homes. We publish side-by-side comparisons, in-depth reviews and plain-English explainers across three areas:
+      "WiseCompare is an independent comparison site run by Ranganath Mutyala. Learn who we are, how we research and rate products, and how we stay independent.",
+    content: `WiseCompare (${DOMAIN}) is an independent comparison and review website. It helps everyday consumers and small businesses make better decisions about software, money tools and their homes. We publish side-by-side comparisons, in-depth reviews and plain-English guides in three areas:
 
-- **AI & B2B productivity software** — AI assistants, meeting tools, automation and collaboration platforms.
-- **Consumer finance & credit tools** — credit monitoring, budgeting apps and other personal-finance services.
-- **Home services & insurance** — homeowners insurance, home warranties and related services.
+- **AI & productivity software:** AI assistants, meeting tools, automation and collaboration apps.
+- **Personal finance & credit tools:** credit monitoring, budgeting apps and other money-management services.
+- **Home services & insurance:** homeowners insurance, home warranties and related services.
 
-## Our mission
+## Meet the founder
 
-Most people make these decisions with too little time and too much marketing. Our job is to do the reading for you: we gather pricing, terms, features and limitations in one place, explain the trade-offs honestly, and tell you clearly who a product is — and isn't — a good fit for.
+WiseCompare was founded and is run by **${OWNER}**, based in ${LOCATION}.
+
+Ranganath has a professional background in data and cloud technology. His day-to-day work involves keeping business systems reliable, secure and well-documented. He started WiseCompare after seeing how hard it is for ordinary buyers to compare products honestly: pricing pages hide the real cost, free trials quietly turn into subscriptions, and many "reviews" are really advertisements.
+
+His approach is simple: read the fine print, compare products on the things that actually matter to the buyer, and explain the trade-offs clearly, including the downsides.
 
 ## How we research and rate products
 
 Every comparison and review follows the same process:
 
-1. **Define the reader's job.** We start with the problem a reader is trying to solve (for example, "record and summarise client calls" or "get a fair home insurance quote") and decide which criteria actually matter for that job.
-2. **Gather primary information.** We review the provider's own pricing pages, terms of service, privacy policies and help documentation. Where practical we sign up for trials or request demos.
-3. **Score against published criteria.** Ratings on a 0–5 scale reflect weighted criteria such as value for money, features, ease of use, transparency of fees and terms, privacy and security, and customer support.
-4. **Show the downsides.** Every review includes limitations and a "watch out for" list. If we wouldn't recommend something for a particular type of user, we say so.
-5. **Review and update.** We re-check pricing and key terms on a regular schedule and update the "last updated" date when we do. Prices and promotions change often, so always confirm current terms on the provider's site.
+1. **Start with the reader's problem.** We begin with what the reader is trying to achieve (for example, "summarise client calls automatically" or "get a fair home insurance quote") and decide which criteria matter for that job.
+2. **Go to primary sources.** We review each provider's own pricing pages, terms of service, privacy policy and help documentation. Where practical, we sign up for free plans or trials.
+3. **Score against clear criteria.** Ratings on a 0–5 scale reflect value for money, features, ease of use, transparency of pricing and terms, privacy and security, and customer support.
+4. **Always show the downsides.** Every review includes limitations and a "watch out for" list. If a product isn't right for a certain type of user, we say so.
+5. **Keep it current.** We re-check prices and key terms regularly and show a "last updated" date on each page. Prices and promotions change often, so always confirm current terms on the provider's website.
 
 ## Editorial independence
 
-We earn money through affiliate partnerships: when you click certain links and sign up or buy, we may receive a commission. This never costs you extra. Our editorial team decides what to cover and how to rate it; commercial partners cannot pay for a higher rating, a better position in our editorial verdicts, or the removal of negative information. Where placement in a comparison table is influenced by commercial relationships, our [Affiliate Disclosure](/affiliate-disclosure) explains how.
+WiseCompare is free to read. We earn money through affiliate partnerships: if you click certain links and then sign up or buy, we may receive a commission, at no extra cost to you. Partners cannot pay for a better rating, a more favourable review or the removal of negative information. You can read exactly how this works in our [Affiliate Disclosure](/affiliate-disclosure).
 
 ## What we don't do
 
-- We don't provide personalised financial, legal or insurance advice. Our content is general information to help you compare options; consider speaking to a licensed professional about your specific situation.
-- We are not an insurer, lender, broker or software vendor, and we don't make credit or underwriting decisions.
+- We don't give personalised financial, legal, tax or insurance advice. Our content is general information to help you compare options. For decisions about your own situation, speak to a licensed professional.
+- We are not a lender, insurer, broker or software vendor, and we don't make credit or underwriting decisions.
 - We don't sell your personal information.
 
-## Corrections
+## Corrections and feedback
 
-We work hard to be accurate, but mistakes happen. If you spot an error, please [contact us](/contact) and we'll review it promptly and correct it where needed.
+Accuracy matters to us. If you spot an error or something out of date, please [contact us](/contact) and we will review and correct it promptly.
 
-## Who we are
+## Contact
 
-${SITE_NAME} is operated by [Your Company Name], [registered address]. You can reach our editorial team through our [contact page](/contact).`,
+- **${OWNER}**, Founder & Editor, WiseCompare
+- ${LOCATION}
+- Email: [${EMAIL}](mailto:${EMAIL})`,
   },
   {
     slug: "contact",
     title: "Contact Us",
-    metaDescription: "Get in touch with our editorial team for corrections, partnership enquiries or general questions.",
-    content: `We'd love to hear from you. Use the form below for:
+    metaDescription:
+      "Contact WiseCompare for corrections, reader questions, partnerships or privacy requests. We reply within two business days.",
+    content: `We'd love to hear from you. WiseCompare is run by **${OWNER}** from ${LOCATION}, and every message is read personally.
 
-- **Corrections** — if something in one of our articles looks wrong or out of date.
-- **Reader questions** — we can't give personal financial or insurance advice, but we read every message and use your questions to plan new guides.
-- **Partnerships & advertising** — please note that commercial partners cannot influence our ratings or editorial content.
-- **Privacy requests** — to access, correct or delete personal data we hold about you (see our [Privacy Policy](/privacy-policy)).
+- **Email:** [${EMAIL}](mailto:${EMAIL})
+- **Location:** ${LOCATION}
+- **Response time:** within 2 business days
 
-We aim to respond within two business days.`,
+## What you can contact us about
+
+- **Corrections:** if something in one of our articles looks wrong or out of date.
+- **Reader questions:** we can't give personal financial or insurance advice, but your questions help us decide which guides to write next.
+- **Partnerships & advertising:** brands and affiliate networks are welcome to get in touch. Please note that commercial partners cannot influence our ratings or editorial content.
+- **Privacy requests:** to access, correct or delete personal data we hold about you (see our [Privacy Policy](/privacy-policy)).
+
+You can also use the form below.`,
   },
   {
     slug: "privacy-policy",
     title: "Privacy & Cookie Policy",
     metaDescription:
-      "How we collect, use and protect your personal information, your rights under GDPR and CCPA/CPRA, and how we use cookies.",
-    content: `This Privacy & Cookie Policy explains how [Your Company Name] ("we", "us", "${SITE_NAME}") collects, uses and protects personal information when you use this website. It applies to visitors worldwide and includes specific information for residents of the European Economic Area and UK (GDPR / UK GDPR) and California (CCPA as amended by the CPRA).
+      "How WiseCompare collects, uses and protects personal information, how we use cookies, and your rights under GDPR, CCPA/CPRA and India's DPDP Act.",
+    content: `This Privacy & Cookie Policy explains how WiseCompare (${DOMAIN}) collects, uses and protects personal information. WiseCompare is operated by **${OWNER}**, ${LOCATION} ("we", "us", "our"). We are responsible for (the "data controller" or "data fiduciary" of) personal information collected through this website.
+
+This policy applies to all visitors, and includes information for residents of the European Economic Area and UK (GDPR / UK GDPR), California (CCPA as amended by the CPRA) and India (Digital Personal Data Protection Act, 2023).
+
+**Contact for privacy questions:** [${EMAIL}](mailto:${EMAIL})
 
 ## Information we collect
 
 **Information you give us**
 
-- **Email address** — if you subscribe through an email signup box, along with the page you signed up on and the time of signup.
-- **Contact form details** — your name, email address and message when you contact us.
+- **Email address:** if you subscribe through an email signup box, together with the page you signed up on, the time of signup and your consent.
+- **Contact form details:** your name, email address and message when you contact us.
 
 **Information collected automatically**
 
-- **Usage and device data** — such as pages visited, referring URL, approximate location derived from IP address, browser type and device type.
-- **Advertising and campaign parameters** — when you arrive from an advertisement, the URL may contain identifiers such as a Google click ID (gclid) or UTM campaign tags. These may be passed to our tracking partner when you click an outbound link so that we can attribute visits and conversions.
-- **Cookies and similar technologies** — see "Cookies" below.
+- **Technical and usage data:** such as pages visited, referring website, approximate location derived from your IP address, browser type and device type. Our hosting provider processes this to deliver and secure the site.
+- **Advertising and campaign parameters:** when you arrive from an online advertisement, the web address may contain identifiers such as a Google click ID (gclid) or UTM campaign tags. When you click a link to a partner, these may be passed to our click-tracking provider and the partner so that visits and sign-ups can be attributed correctly.
+- **Cookies and similar technologies:** see "Cookies" below.
 
 ## How we use your information
 
-- To operate, maintain and improve the website.
-- To send you the content you requested and, if you opted in, occasional emails (you can unsubscribe at any time).
-- To respond to your messages.
-- To measure the performance of our content and advertising, including which links are clicked and whether a referral resulted in a sign-up or purchase with a partner.
-- To protect the site against fraud, spam and abuse, and to comply with legal obligations.
+- To operate, maintain, secure and improve the website.
+- To send you the content you requested and, if you opted in, occasional emails. You can unsubscribe at any time.
+- To reply to your messages.
+- To measure how our content and advertising perform, including which partner links are clicked and whether a referral led to a sign-up or purchase.
+- To prevent spam, fraud and abuse, and to meet legal obligations.
 
-**Legal bases (GDPR):** consent (email subscriptions, non-essential cookies), legitimate interests (site security, basic analytics, responding to enquiries) and legal obligation.
+**Legal bases (GDPR):** your consent (email subscriptions, non-essential cookies), our legitimate interests (site security, basic performance measurement, replying to enquiries) and legal obligations.
 
-## Affiliate links and tracking partners
+## Affiliate links and tracking
 
-Some links on this site are affiliate links. When you click one, our tracking platform and the partner's website may set cookies or receive referral data (such as a click identifier) so that the partner can credit us for a referral. Those third parties process data under their own privacy policies. We do not receive your financial details or application data from partners.
+Some links on this site are affiliate links. When you click one, our click-tracking platform and the partner's website (or the affiliate network that manages the partnership) may set cookies or receive referral data, such as a click identifier, so that the partner can credit us for the referral. These companies process data under their own privacy policies. We never receive your payment details or application data from partners.
 
-## Sharing your information
+## Who we share information with
 
-We do not sell your personal information and we do not share it for cross-context behavioural advertising except as described in this policy and with your consent where required. We share data only with:
+We do not sell your personal information. We share it only with:
 
-- Service providers who host the site, deliver email or provide analytics and click tracking, under contracts that limit their use of the data.
-- Advertising and affiliate partners, limited to referral and attribution data.
-- Authorities where required by law.
+- **Service providers** that help us run the site: website hosting, security and email forwarding (Cloudflare), and click tracking for affiliate links. They may only use the data to provide their services to us.
+- **Affiliate partners and networks**, limited to the referral and attribution data described above.
+- **Authorities**, where required by law.
 
 ## Cookies
 
-| Type | Purpose | Can you opt out? |
+| Type | Purpose | Your choice |
 | --- | --- | --- |
-| Essential | Remember your cookie choice; keep the site secure | No — required for the site to work |
-| Analytics | Understand which pages are useful | Yes |
-| Advertising / affiliate | Attribute ad clicks and referrals to partners | Yes |
+| Essential | Remember your cookie choice and keep the site secure | Always on; required for the site to work |
+| Performance | Understand which pages are useful | Optional |
+| Advertising / affiliate | Attribute ad clicks and referrals to partners | Optional |
 
-You can choose "Essential only" in our cookie banner, change your browser settings to block cookies, or clear cookies at any time. Blocking some cookies may affect how the site works.
+You can choose **"Essential only"** in our cookie banner, block cookies in your browser settings, or delete cookies at any time. Blocking some cookies may affect how parts of the site work.
 
-## Data retention
+## How long we keep information
 
-We keep email subscriber data until you unsubscribe or ask us to delete it, and contact messages for up to 24 months. Analytics data is retained in aggregated form.
+- Email subscriber data: until you unsubscribe or ask us to delete it.
+- Contact messages: up to 24 months.
+- Technical logs: kept only for a limited period by our hosting provider for security and troubleshooting.
 
 ## Your rights
 
-Depending on where you live, you may have the right to access, correct, delete or export your personal data; to object to or restrict certain processing; to withdraw consent at any time; and to lodge a complaint with your local data protection authority.
+Depending on where you live, you may have the right to:
 
-**California residents** have the right to know what personal information we collect, to request deletion and correction, to opt out of the "sale" or "sharing" of personal information, to limit use of sensitive personal information, and not to be discriminated against for exercising these rights. We honour Global Privacy Control (GPC) signals as an opt-out of sharing where technically feasible.
+- access the personal data we hold about you and receive a copy;
+- correct inaccurate data, or have your data deleted;
+- object to or restrict certain processing;
+- withdraw your consent at any time (this doesn't affect processing done before you withdrew);
+- complain to your local data protection authority.
 
-To exercise any of these rights, use our [contact page](/contact). We will verify your request and respond within the time required by law.
+**California residents** have the right to know what personal information we collect, to request deletion and correction, to opt out of the "sale" or "sharing" of personal information, and not to be discriminated against for exercising these rights. We do not sell personal information, and we honour Global Privacy Control (GPC) signals where technically feasible.
+
+**Residents of India** may exercise their rights under the Digital Personal Data Protection Act, 2023, including access, correction, erasure and grievance redressal. Our grievance contact is ${OWNER}, at [${EMAIL}](mailto:${EMAIL}).
+
+To make any request, email [${EMAIL}](mailto:${EMAIL}). We may need to verify your identity, and we will respond within the time required by applicable law.
 
 ## International transfers
 
-Our service providers may process data outside your country. Where required, we rely on appropriate safeguards such as Standard Contractual Clauses.
+We are based in India, and our service providers may process data in other countries, including the United States. Where required, transfers are protected by appropriate safeguards such as Standard Contractual Clauses.
 
 ## Children
 
-This site is not directed to children under 16, and we do not knowingly collect their personal information.
+This website is not directed to children under 16 (or under 18 in India), and we do not knowingly collect their personal information. If you believe a child has given us personal data, please contact us and we will delete it.
 
 ## Security
 
-We use reasonable technical and organisational measures to protect personal information, including encrypted connections (HTTPS) and restricted administrative access. No method of transmission over the internet is completely secure.
+We use reasonable technical and organisational measures to protect personal information, including encrypted connections (HTTPS) and restricted, password-protected administrative access. No method of transmission over the internet is completely secure.
 
 ## Changes to this policy
 
 We may update this policy from time to time. The "last updated" date at the top of this page shows when it was last revised.
 
-## Contact
+## Contact us
 
-[Your Company Name], [registered address]. Contact us via our [contact page](/contact).`,
+- **${OWNER}**, WiseCompare
+- ${LOCATION}
+- Email: [${EMAIL}](mailto:${EMAIL})`,
   },
   {
     slug: "affiliate-disclosure",
     title: "Affiliate & Advertiser Disclosure",
     metaDescription:
-      "How we make money: our affiliate relationships, how they may affect where products appear, and how we keep our ratings independent.",
+      "How WiseCompare makes money: our affiliate relationships, how they may affect where products appear, and how we keep our ratings independent.",
     content: `${SITE_NAME} is a free, reader-supported publication. To keep it free, we participate in affiliate and advertising programs. This page explains what that means, in line with the U.S. Federal Trade Commission's Guides Concerning the Use of Endorsements and Testimonials in Advertising and similar rules in other countries.
 
 ## The short version
@@ -168,9 +201,9 @@ Compensation may influence **which** products we feature and **where and how** t
 
 ## How we keep ratings independent
 
-- Ratings are based on weighted editorial criteria described on our [About & Editorial Standards](/about) page.
-- Commercial teams do not review or approve editorial content before publication.
-- We include limitations and downsides for every product we feature — including those we earn commission from.
+- Ratings are based on weighted editorial criteria described on our [About](/about) page.
+- Commercial partners do not review or approve editorial content before publication.
+- We include limitations and downsides for every product we feature, including those we earn commission from.
 
 ## Tracking
 
@@ -182,6 +215,6 @@ Our content is for general information only and is not financial, legal, tax or 
 
 ## Questions
 
-If you have questions about this disclosure, please [contact us](/contact).`,
+${SITE_NAME} is operated by ${OWNER}, ${LOCATION}. If you have questions about this disclosure, please [contact us](/contact).`,
   },
 ];
