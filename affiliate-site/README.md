@@ -90,6 +90,8 @@ Draft landing pages can be previewed at `/offers/<slug>` while you're logged in.
 
 ## How tracking works (Google Ads-safe)
 
+> Full Google Ads → landing page → BeMob → MyLead setup, plus the stop-loss automation (Loop 2): see [`../automation/README.md`](../automation/README.md).
+
 - **Single-hop CTAs.** Every CTA is a plain `<a href="{BeMob CTA URL}" rel="nofollow sponsored">`. There is no JavaScript redirect and no intermediate `/go/` hop.
 - **Parameter passthrough.** This is on by default and can be turned off per page. If a visitor arrives with `gclid`, `gbraid`, `wbraid`, `keyword`, `creative`, `matchtype`, `network`, `device`, `placement`, `campaignid`, `adgroupid`, `targetid` or any `utm_*` parameter, the server appends those to the CTA URL before the page is sent. Other parameters are ignored.
 - **LP pixel.** Paste BeMob's Landing Page pixel snippet into the page's "Tracking & Offer" tab. It's injected into `<head>` (or the end of `<body>`), and any `<script>` tags in it actually run. If a page has no pixel, the global pixel from Settings is used.

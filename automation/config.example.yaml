@@ -1,0 +1,69 @@
+# Copy to config.yaml (git-ignored) and fill in your real IDs.
+#   cp config.example.yaml config.yaml
+
+google_ads:
+  # Path to the google-ads.yaml credentials file (developer token, OAuth client, refresh token).
+  credentials_file: google-ads.yaml
+  # The ad account that runs the campaigns: 10 digits, no dashes.
+  customer_id: "1234567890"
+  # Google Ads reports cost in the ACCOUNT currency. Payouts from MyLead are in USD.
+  # If your Google Ads account is in USD, leave 1.0.
+  # If it is in INR, set this to the INR->USD rate, e.g. 0.0119 (1 INR = 0.0119 USD).
+  account_currency_to_usd: 1.0
+  # Conversion action that receives Accepted leads (type "Import > from clicks").
+  # Find the ID with:  python -m ops check
+  offline_conversion_action_id: "000000000"
+  # UK visitors: Google requires consent signals for uploaded conversions from the UK/EEA.
+  # Leave UNSPECIFIED unless your cookie banner actually collected consent (then GRANTED).
+  consent_ad_user_data: UNSPECIFIED
+
+# One entry per live offer (the plan says 3 max, but START WITH ONE).
+offers:
+  - key: ai-saas-1
+    name: "AI SaaS starter offer"
+    google_ads_campaign_id: "11111111111"
+    bemob_campaign: "WiseCompare - AI SaaS - Offer 1"   # campaign name exactly as in BeMob
+    payout_usd: 20.0          # MyLead payout per Accepted lead
+    daily_cap_usd: 10.0       # hard stop-loss per day (plan: $10/day)
+
+guardrails:
+  # Pause a keyword that spent this many times the payout with 0 conversions.
+  keyword_zero_conv_payout_multiple: 2.0
+  keyword_lookback_days: 14
+  # Alert (and optionally pause) when MyLead rejects more than this share of decided leads.
+  rejection_rate_alert: 0.30
+  rejection_min_decided_leads: 5    # don't judge on 1 or 2 leads
+  pause_on_high_rejection: false    # true = also pause the campaign
+  # Whole-account monthly loss limit across all offers, in USD. Alerts when spend minus
+  # accepted revenue this month goes above it. Pick a number your family budget can lose.
+  monthly_loss_limit_usd: 150
+
+negatives:
+  lookback_days: 7
+  # Search terms containing any of these words get added as campaign negatives.
+  junk_words: [free, jobs, job, career, careers, salary, login, "log in", sign in, crack,
+               cracked, torrent, reddit, youtube, download, apk, pdf, course, tutorial,
+               meaning, definition, wikipedia, internship]
+  # Search terms that cost >= this multiple of payout with 0 conversions are only
+  # SUGGESTED (never added automatically). Review them yourself.
+  suggest_wasted_payout_multiple: 1.0
+
+bemob_csv:
+  # Timezone of the BeMob report you export (BeMob settings -> timezone).
+  timezone: "UTC"
+  # Column names in BeMob's Conversions export. Each entry is a list of accepted
+  # header names; the first one found is used. Run `python -m ops csvcheck FILE`
+  # to see the headers in your file and adjust here if needed.
+  columns:
+    click_id: ["Click ID", "ClickID", "click_id"]
+    external_id: ["External ID", "ExternalID", "external_id", "gclid"]
+    status: ["Status", "Conversion status", "status"]
+    payout: ["Payout", "Revenue", "payout"]
+    campaign: ["Campaign", "Campaign name", "campaign"]
+    time: ["Postback timestamp", "Conversion time", "Visit timestamp", "Date", "time"]
+  accepted_statuses: [approved, accepted, confirmed, sale, "1"]
+  rejected_statuses: [rejected, declined, cancelled, canceled, trash, invalid, "-1", "0"]
+
+landing_page:
+  # Share of landing-page visitors who click the CTA (plan: 0.40). Used by `breakeven`.
+  ctr: 0.40

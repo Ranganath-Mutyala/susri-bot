@@ -1,0 +1,10 @@
+# Secrets and private data: never commit these
+config.yaml
+google-ads.yaml
+*.json.key
+data/
+out/
+state/
+__pycache__/
+.venv/
+.pytest_cache/

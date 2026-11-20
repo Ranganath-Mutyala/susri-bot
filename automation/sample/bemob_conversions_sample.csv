@@ -1,0 +1,7 @@
+Postback timestamp,Click ID,External ID,Campaign,Status,Payout
+2026-11-18 10:15:00,ck001,Cj0KCQiA_test_gclid_1,WiseCompare - AI SaaS - Offer 1,pending,20.00
+2026-11-19 09:00:00,ck001,Cj0KCQiA_test_gclid_1,WiseCompare - AI SaaS - Offer 1,approved,20.00
+2026-11-19 11:30:00,ck002,Cj0KCQiA_test_gclid_2,WiseCompare - AI SaaS - Offer 1,rejected,0
+2026-11-19 12:00:00,ck003,,WiseCompare - AI SaaS - Offer 1,approved,20.00
+2026-11-19 13:00:00,ck004,Cj0KCQiA_test_gclid_4,WiseCompare - AI SaaS - Offer 1,pending,20.00
+2026-11-19 14:00:00,ck005,Cj0KCQiA_test_gclid_5,Some other campaign,approved,15.00
