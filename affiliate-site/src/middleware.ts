@@ -23,9 +23,10 @@ export async function middleware(req: NextRequest) {
     if (pathname.startsWith("/api/")) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
-    const url = req.nextUrl.clone();
-    url.pathname = "/admin/login";
-    url.search = `?next=${encodeURIComponent(pathname)}`;
+    // Build the public URL from proxy headers so the redirect is correct behind Nginx / Cloudflare.
+    const host = req.headers.get("x-forwarded-host") ?? req.headers.get("host") ?? req.nextUrl.host;
+    const proto = req.headers.get("x-forwarded-proto")?.split(",")[0] ?? req.nextUrl.protocol.replace(":", "");
+    const url = new URL(`/admin/login?next=${encodeURIComponent(pathname)}`, `${proto}://${host}`);
     return NextResponse.redirect(url);
   }
   return NextResponse.next();

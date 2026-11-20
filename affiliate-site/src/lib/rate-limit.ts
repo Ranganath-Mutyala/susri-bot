@@ -17,5 +17,11 @@ export function rateLimit(key: string, limit = 5, windowMs = 60_000) {
 }
 
 export function clientIp(headers: Headers) {
-  return headers.get("x-forwarded-for")?.split(",")[0]?.trim() || headers.get("x-real-ip") || "unknown";
+  // Behind Cloudflare, cf-connecting-ip is the real visitor IP.
+  return (
+    headers.get("cf-connecting-ip") ||
+    headers.get("x-real-ip") ||
+    headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+    "unknown"
+  );
 }

@@ -31,19 +31,19 @@ The admin panel is at **http://localhost:3000/admin**. Sign in with `ADMIN_EMAIL
 | `AUTH_SECRET` | Signs the admin session cookie (JWT). Generate with `openssl rand -base64 32`. Changing it logs everyone out. |
 | `NEXT_PUBLIC_SITE_URL` | Your public URL, e.g. `https://www.yourdomain.com`. Used for the sitemap and canonical URLs. |
 
-## Production (VPS)
+## Production hosting (VPS + Cloudflare)
 
-```bash
-npm ci
-npx prisma migrate deploy
-npx prisma db seed            # first deploy only (safe to re-run; it never overwrites your edits)
-npm run build
-npm start                     # port 3000; use PORT=8080 npm start to change it
-```
+**Follow [`deploy/DEPLOY.md`](deploy/DEPLOY.md).** It's a step-by-step guide covering domain registration on Cloudflare, VPS setup, DNS, SSL (Full strict) and recommended Cloudflare settings. It comes with ready-to-run scripts:
 
-Run it behind Nginx or Caddy with HTTPS, and keep it alive with `pm2 start npm --name site -- start` or a systemd unit. **Back up `prisma/prod.db`** (or whichever file `DATABASE_URL` points to). It holds all your content and leads.
+| Script | Purpose |
+| --- | --- |
+| `deploy/setup-server.sh` | One-time Ubuntu setup: Node 22, PM2, Nginx, SQLite, firewall, swap, app user, daily backup cron |
+| `deploy/deploy.sh` | Validates `.env`, takes a backup, installs, migrates, seeds missing content, builds, (re)starts and health-checks |
+| `deploy/install-nginx.sh` | Nginx site for your domain using the Cloudflare Origin Certificate (www → apex, HTTP → HTTPS) |
+| `deploy/backup.sh` / `deploy/restore.sh` | Consistent SQLite backups (integrity-checked, 14-day retention) and a guarded restore |
+| `deploy/ecosystem.config.cjs` | PM2 config: single instance, bound to 127.0.0.1:3000 |
 
-> Serverless hosts such as Vercel have no persistent disk, so SQLite won't keep data there. Use PostgreSQL on those hosts (see below).
+In production, the database lives **outside the code folder** at `/var/lib/clearcompare/prod.db` (see `.env.production.example`), so deploys never touch your data. `GET /api/health` reports app + database status for uptime monitors.
 
 ### Switching to PostgreSQL
 
