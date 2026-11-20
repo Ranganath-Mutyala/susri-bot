@@ -4,6 +4,8 @@
 
 export const SITE_NAME = "WiseCompare";
 const OWNER = "Ranganath Mutyala";
+const COFOUNDER = "Suresh Gottapu";
+const CEO = "Niteesh Manne";
 const LOCATION = "Hyderabad, Telangana, India";
 const EMAIL = "hello@wisecompareguide.com";
 const DOMAIN = "wisecompareguide.com";
@@ -20,11 +22,17 @@ export const pages = [
 - **Personal finance & credit tools:** credit monitoring, budgeting apps and other money-management services.
 - **Home services & insurance:** homeowners insurance, home warranties and related services.
 
-## Meet the founder
+## Meet the team
 
-WiseCompare was founded and is run by **${OWNER}**, based in ${LOCATION}.
+WiseCompare is run by a small team based in ${LOCATION}:
 
-Ranganath has a professional background in data and cloud technology. His day-to-day work involves keeping business systems reliable, secure and well-documented. He started WiseCompare after seeing how hard it is for ordinary buyers to compare products honestly: pricing pages hide the real cost, free trials quietly turn into subscriptions, and many "reviews" are really advertisements.
+- **${OWNER}**, Founder & Editor
+- **${COFOUNDER}**, Co-Founder
+- **${CEO}**, CEO
+
+### Why we started WiseCompare
+
+Founder Ranganath Mutyala has a professional background in data and cloud technology. His day-to-day work involves keeping business systems reliable, secure and well-documented. He started WiseCompare after seeing how hard it is for ordinary buyers to compare products honestly: pricing pages hide the real cost, free trials quietly turn into subscriptions, and many "reviews" are really advertisements.
 
 His approach is simple: read the fine print, compare products on the things that actually matter to the buyer, and explain the trade-offs clearly, including the downsides.
 
@@ -54,7 +62,9 @@ Accuracy matters to us. If you spot an error or something out of date, please [c
 
 ## Contact
 
-- **${OWNER}**, Founder & Editor, WiseCompare
+- **${OWNER}**, Founder & Editor
+- **${COFOUNDER}**, Co-Founder
+- **${CEO}**, CEO
 - ${LOCATION}
 - Email: [${EMAIL}](mailto:${EMAIL})`,
   },
@@ -63,7 +73,15 @@ Accuracy matters to us. If you spot an error or something out of date, please [c
     title: "Contact Us",
     metaDescription:
       "Contact WiseCompare for corrections, reader questions, partnerships or privacy requests. We reply within two business days.",
-    content: `We'd love to hear from you. WiseCompare is run by **${OWNER}** from ${LOCATION}, and every message is read personally.
+    content: `We'd love to hear from you. WiseCompare is run by a small team in ${LOCATION}, and every message is read personally.
+
+**Our team**
+
+- **${OWNER}**, Founder & Editor
+- **${COFOUNDER}**, Co-Founder
+- **${CEO}**, CEO
+
+**How to reach us**
 
 - **Email:** [${EMAIL}](mailto:${EMAIL})
 - **Location:** ${LOCATION}
