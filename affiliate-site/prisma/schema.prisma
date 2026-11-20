@@ -1,0 +1,137 @@
+// Prisma schema — SQLite by default.
+// To move to PostgreSQL: change provider to "postgresql", set DATABASE_URL,
+// then run `npx prisma migrate dev`. JSON-ish fields are stored as String
+// so the schema works identically on both databases.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+/// Single-row global settings (id is always 1)
+model Setting {
+  id             Int      @id @default(1)
+  siteName       String   @default("ClearCompare")
+  tagline        String   @default("Independent comparisons for smarter decisions")
+  logoUrl        String   @default("")
+  footerText     String   @default("")
+  contactEmail   String   @default("")
+  contactPhone   String   @default("")
+  contactAddress String   @default("")
+  globalPixel    String   @default("") /// Fallback tracking snippet used when a landing page has no pixel of its own
+  headScripts    String   @default("") /// Optional site-wide head snippet (e.g. analytics); rendered on all public pages
+  updatedAt      DateTime @updatedAt
+}
+
+/// Compliance / static pages: about, contact, privacy-policy, affiliate-disclosure
+model Page {
+  id              String   @id @default(cuid())
+  slug            String   @unique
+  title           String
+  metaDescription String   @default("")
+  content         String /// Markdown
+  updatedAt       DateTime @updatedAt
+}
+
+model LandingPage {
+  id              String   @id @default(cuid())
+  slug            String   @unique
+  title           String /// Internal / page title
+  category        String /// ai-saas | finance | home-insurance
+  status          String   @default("draft") /// draft | published
+  metaTitle       String   @default("")
+  metaDescription String   @default("")
+
+  // Tracking & offer config
+  offerName       String   @default("")
+  ctaUrl          String   @default("") /// BeMob CTA (click) URL — every CTA on the page links here directly
+  pixelScript     String   @default("") /// BeMob LP pixel snippet (HTML/JS)
+  pixelPlacement  String   @default("head") /// head | body
+  passthroughParams Boolean @default(true) /// Forward gclid / utm_* / keyword / creative to the CTA URL
+  payout          Float    @default(0)
+  geos            String   @default("[]") /// JSON string[] e.g. ["US","UK"]
+  internalNotes   String   @default("")
+
+  // Hero
+  badgeText       String   @default("")
+  headline        String   @default("")
+  subheadline     String   @default("")
+  heroBullets     String   @default("[]") /// JSON string[]
+  ctaText         String   @default("Check Availability")
+  ctaSubtext      String   @default("")
+
+  // Comparison table
+  comparisonTitle   String @default("")
+  comparisonColumns String @default("[]") /// JSON string[] (middle columns; Tool, Rating and CTA are fixed)
+  comparisonRows    String @default("[]") /// JSON {name, tagline, highlight, rating, cells[], ctaUrl?, ctaLabel?}[]
+
+  // Body
+  body            String   @default("") /// Markdown, 600–900 words recommended
+  pros            String   @default("[]") /// JSON string[]
+  cons            String   @default("[]") /// JSON string[]
+  verdict         String   @default("")
+
+  // Module toggles
+  showComparison   Boolean @default(true)
+  showEmailCapture Boolean @default(false)
+  showStickyCta    Boolean @default(true)
+  emailHeadline    String  @default("Get our free buyer's checklist")
+  emailSubtext     String  @default("One useful email. No spam. Unsubscribe anytime.")
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  leads Lead[]
+
+  @@index([category, status])
+}
+
+model Article {
+  id              String    @id @default(cuid())
+  slug            String    @unique
+  title           String
+  excerpt         String    @default("")
+  category        String
+  content         String /// Markdown
+  status          String    @default("draft") /// draft | published
+  featured        Boolean   @default(false)
+  coverImage      String    @default("")
+  metaTitle       String    @default("")
+  metaDescription String    @default("")
+  authorName      String    @default("Editorial Team")
+  authorRole      String    @default("")
+  authorBio       String    @default("")
+  publishedAt     DateTime?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  @@index([category, status])
+}
+
+model Lead {
+  id            String       @id @default(cuid())
+  email         String
+  sourceSlug    String
+  landingPageId String?
+  landingPage   LandingPage? @relation(fields: [landingPageId], references: [id], onDelete: SetNull)
+  consent       Boolean      @default(true)
+  userAgent     String       @default("")
+  createdAt     DateTime     @default(now())
+
+  @@unique([email, sourceSlug])
+  @@index([createdAt])
+}
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  subject   String   @default("")
+  message   String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
