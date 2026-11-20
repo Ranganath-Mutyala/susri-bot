@@ -1,10 +1,10 @@
 export const CATEGORIES = [
   {
     slug: "ai-saas",
-    name: "AI & SaaS",
-    longName: "AI & B2B Productivity SaaS",
+    name: "AI & Software",
+    longName: "AI Tools, Software & Online Privacy",
     description:
-      "Hands-on comparisons of AI assistants, automation platforms and B2B productivity software — tested against real team workflows.",
+      "Plain-English guides to AI assistants, productivity software and VPNs — what they really do, what they cost, and how to choose safely.",
   },
   {
     slug: "finance",
