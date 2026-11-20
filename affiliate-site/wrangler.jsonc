@@ -1,0 +1,24 @@
+// Cloudflare Workers configuration (used by OpenNext + Wrangler).
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "smartpick-site",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2026-10-01",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "observability": { "enabled": true },
+  // Keep variables you set in the Cloudflare dashboard when deploying.
+  "keep_vars": true,
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "smartpick-db",
+      // Paste the Database ID from Cloudflare dashboard → Storage & Databases → D1 → smartpick-db
+      "database_id": "REPLACE_WITH_YOUR_D1_DATABASE_ID",
+      "migrations_dir": "migrations"
+    }
+  ]
+}

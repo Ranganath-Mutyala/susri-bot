@@ -14,12 +14,23 @@
     "db:deploy": "prisma migrate deploy",
     "db:seed": "prisma db seed",
     "db:reset": "prisma migrate reset --force",
-    "setup": "prisma migrate deploy && prisma db seed"
+    "setup": "prisma migrate deploy && prisma db seed",
+    "cf:build": "opennextjs-cloudflare build",
+    "cf:preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
+    "cf:deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
+    "cf:db:migrate": "wrangler d1 migrations apply smartpick-db --remote",
+    "cf:db:seed": "wrangler d1 execute smartpick-db --remote --file seed/seed.sql",
+    "cf:db:migrate:local": "wrangler d1 migrations apply smartpick-db --local",
+    "cf:db:seed:local": "wrangler d1 execute smartpick-db --local --file seed/seed.sql",
+    "deploy:cloudflare": "npm run cf:db:migrate && npm run cf:db:seed && opennextjs-cloudflare deploy",
+    "seed:sql": "bash scripts/build-seed-sql.sh"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
+    "@opennextjs/cloudflare": "1.20.17",
+    "@prisma/adapter-d1": "6.19.3",
     "@prisma/client": "6.19.3",
     "jose": "5.10.0",
     "marked": "15.0.12",
@@ -37,7 +48,8 @@
     "prisma": "6.19.3",
     "tailwindcss": "3.4.19",
     "tsx": "4.20.3",
-    "typescript": "5.8.3"
+    "typescript": "5.8.3",
+    "wrangler": "4.155.0"
   },
   "engines": {
     "node": ">=18.18"

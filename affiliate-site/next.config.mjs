@@ -21,3 +21,9 @@ const nextConfig = {
   },
 };
 export default nextConfig;
+
+// Local `next dev` gets Cloudflare bindings (local D1) when CF_DEV=1.
+if (process.env.CF_DEV === "1") {
+  const { initOpenNextCloudflareForDev } = await import("@opennextjs/cloudflare");
+  initOpenNextCloudflareForDev();
+}

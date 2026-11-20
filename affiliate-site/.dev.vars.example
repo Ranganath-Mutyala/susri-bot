@@ -1,0 +1,6 @@
+# Local secrets for `npm run cf:preview` (copy to .dev.vars). In production, set these
+# in Cloudflare dashboard → Workers → smartpick-site → Settings → Variables and Secrets.
+ADMIN_EMAIL="admin@example.com"
+ADMIN_PASSWORD="change-me-to-a-long-password"
+AUTH_SECRET="replace-with-a-random-32+-character-string"
+NEXT_PUBLIC_SITE_URL="http://localhost:8787"

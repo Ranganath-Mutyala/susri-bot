@@ -31,7 +31,16 @@ The admin panel is at **http://localhost:3000/admin**. Sign in with `ADMIN_EMAIL
 | `AUTH_SECRET` | Signs the admin session cookie (JWT). Generate with `openssl rand -base64 32`. Changing it logs everyone out. |
 | `NEXT_PUBLIC_SITE_URL` | Your public URL, e.g. `https://www.yourdomain.com`. Used for the sitemap and canonical URLs. |
 
-## Production hosting (VPS + Cloudflare)
+## Production hosting: Cloudflare Workers + D1 (recommended)
+
+**Follow [`deploy/CLOUDFLARE.md`](deploy/CLOUDFLARE.md).** Domain, hosting and database all live on Cloudflare, there's no server to manage, and every push to GitHub deploys automatically (Workers Paid plan, $5/month recommended).
+
+- The app runs on Cloudflare via [OpenNext](https://opennext.js.org/cloudflare). `src/lib/db.ts` uses the D1 binding `DB` on Cloudflare and the SQLite file from `DATABASE_URL` everywhere else, so the same code supports both hosting options.
+- D1 schema: `migrations/` (applied with `npm run cf:db:migrate`). Starter content: `seed/seed.sql` (`npm run cf:db:seed`, idempotent).
+- Secrets on Cloudflare: `ADMIN_EMAIL`, `ADMIN_PASSWORD`, `AUTH_SECRET`, `NEXT_PUBLIC_SITE_URL` (Worker → Settings → Variables and Secrets).
+- If you change `prisma/schema.prisma`, add the matching SQL file to `migrations/` (e.g. generate it with `npx prisma migrate diff`).
+
+## Alternative hosting: VPS + SQLite file
 
 **Follow [`deploy/DEPLOY.md`](deploy/DEPLOY.md).** It's a step-by-step guide covering domain registration on Cloudflare, VPS setup, DNS, SSL (Full strict) and recommended Cloudflare settings. It comes with ready-to-run scripts:
 
