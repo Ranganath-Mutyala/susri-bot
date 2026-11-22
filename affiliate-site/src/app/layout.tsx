@@ -16,6 +16,10 @@ export async function generateMetadata(): Promise<Metadata> {
     title: { default: `${s.siteName} — ${s.tagline}`, template: `%s | ${s.siteName}` },
     description: s.tagline,
     openGraph: { siteName: s.siteName, type: "website" },
+    // Ownership verification tags (rendered server-side in <head>).
+    verification: {
+      other: { "mylead-verification": "18d38579de4d724148e982abfad58bca" },
+    },
   };
 }
 
