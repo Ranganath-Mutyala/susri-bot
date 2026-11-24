@@ -13,5 +13,5 @@ export function emptyLanding(): LandingPayload {
 }
 
 export function emptyArticle(): ArticlePayload {
-  return { slug: "", title: "", excerpt: "", category: "ai-saas", content: "", status: "draft", featured: false, coverImage: "", metaTitle: "", metaDescription: "", authorName: "Editorial Team", authorRole: "", authorBio: "" };
+  return { slug: "", title: "", excerpt: "", category: "ai-saas", content: "", status: "draft", featured: false, coverImage: "", metaTitle: "", metaDescription: "", authorName: "Editorial Team", authorRole: "", authorBio: "", publishedAt: "" };
 }

@@ -1,3 +1,4 @@
+import { liveArticleWhere } from "@/lib/articles";
 import Link from "next/link";
 import { prisma } from "@/lib/db";
 import { CATEGORIES } from "@/lib/categories";
@@ -22,7 +23,7 @@ export default async function HomePage() {
   const [settings, offers, articles] = await Promise.all([
     getSettings(),
     prisma.landingPage.findMany({ where: { status: "published" }, orderBy: { updatedAt: "desc" }, take: 6 }),
-    prisma.article.findMany({ where: { status: "published" }, orderBy: { publishedAt: "desc" }, take: 6 }),
+    prisma.article.findMany({ where: liveArticleWhere(), orderBy: { publishedAt: "desc" }, take: 6 }),
   ]);
 
   return (

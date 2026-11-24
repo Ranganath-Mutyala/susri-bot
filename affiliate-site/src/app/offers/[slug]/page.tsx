@@ -14,6 +14,7 @@ import { EmailCapture } from "@/components/EmailCapture";
 import { Markdown } from "@/components/Markdown";
 import { CtaLink } from "@/components/CtaLink";
 import { PixelInjector } from "@/components/PixelInjector";
+import { getOfferLinkMap } from "@/lib/offer-links";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -54,7 +55,7 @@ export default async function OfferPage({ params, searchParams }: Props) {
   const passthrough = lp.passthroughParams ? pickPassthroughParams(await searchParams) : {};
   const primaryHref = buildCtaHref(lp.ctaUrl, passthrough);
   const hrefFor = (row: ComparisonRow) => buildCtaHref(row.ctaUrl?.trim() || lp.ctaUrl, passthrough);
-  const { html } = renderMarkdown(lp.body);
+  const { html } = renderMarkdown(lp.body, await getOfferLinkMap());
   const pixel = lp.pixelScript.trim() || settings.globalPixel.trim();
 
   return (

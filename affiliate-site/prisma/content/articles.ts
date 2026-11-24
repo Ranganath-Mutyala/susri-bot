@@ -1,4 +1,5 @@
 import { aiVpnArticles } from "./articles-ai-vpn";
+import { batch1Articles } from "./articles-batch1";
 
 // Six starter editorial articles (two per niche). They are educational guides
 // with internal links to each other and to the offer landing pages.
@@ -569,4 +570,5 @@ Gather accurate details, match coverage across every quote, check the insurer's 
 *This article is general information, not insurance advice.*`,
   },
   ...aiVpnArticles,
+  ...batch1Articles,
 ].map((a) => ({ ...a, ...AUTHOR, status: "published" }));

@@ -22,5 +22,9 @@
   .hint { @apply mt-1 text-xs text-ink-mute; }
   .badge { @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium; }
   .eyebrow { @apply text-xs font-semibold uppercase tracking-wider text-brand-600; }
+  .article-prose a.offer-cta, .prose a.offer-cta { @apply my-2 inline-flex items-center justify-center rounded-md bg-cta px-6 py-3 text-base font-semibold text-white no-underline shadow-sm hover:bg-cta-hover; }
+  .table-wrap { @apply -mx-4 overflow-x-auto px-4 sm:mx-0 sm:px-0; }
+  .table-wrap table { @apply my-0 min-w-[560px]; }
+  .offer-pending { @apply rounded bg-amber-100 px-1 text-amber-900 underline decoration-dotted; }
   .article-prose { @apply prose prose-lg max-w-none prose-headings:font-serif prose-headings:text-ink prose-a:text-brand-700 prose-a:underline-offset-2 prose-strong:text-ink prose-table:text-base prose-th:bg-gray-50 prose-th:px-3 prose-td:px-3; }
 }

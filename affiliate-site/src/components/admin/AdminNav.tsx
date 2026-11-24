@@ -6,6 +6,7 @@ const ITEMS = [
   { href: "/admin", label: "Dashboard" },
   { href: "/admin/landing-pages", label: "Landing Pages" },
   { href: "/admin/articles", label: "Articles" },
+  { href: "/admin/offer-links", label: "Offer Links" },
   { href: "/admin/leads", label: "Leads" },
   { href: "/admin/messages", label: "Messages" },
   { href: "/admin/settings", label: "Settings & Compliance" },

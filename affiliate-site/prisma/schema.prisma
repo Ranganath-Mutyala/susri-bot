@@ -135,3 +135,16 @@ model ContactMessage {
   read      Boolean  @default(false)
   createdAt DateTime @default(now())
 }
+
+/// Affiliate links used inside articles via Markdown links like [text](offer:nordvpn).
+/// Paste each tracking link once here; every article using that key updates automatically.
+model OfferLink {
+  id         String   @id @default(cuid())
+  key        String   @unique /// e.g. nordvpn — used as offer:nordvpn in Markdown
+  label      String   @default("") /// e.g. "NordVPN"
+  url        String   @default("") /// MyLead (or BeMob) tracking link; empty = link not shown yet
+  network    String   @default("MyLead")
+  campaignId String   @default("")
+  notes      String   @default("")
+  updatedAt  DateTime @updatedAt
+}

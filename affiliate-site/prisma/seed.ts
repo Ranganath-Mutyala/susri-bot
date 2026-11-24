@@ -12,6 +12,7 @@ import { PrismaClient } from "@prisma/client";
 import { pages, SITE_NAME } from "./content/pages";
 import { landingPages } from "./content/landing";
 import { articles } from "./content/articles";
+import { batch1OfferLinks } from "./content/articles-batch1";
 
 const prisma = new PrismaClient();
 const force = process.env.SEED_FORCE === "1";
@@ -46,6 +47,11 @@ async function main() {
 
   for (const a of articles) {
     await prisma.article.upsert({ where: { slug: a.slug }, update: force ? a : {}, create: a });
+  }
+
+  // Offer link placeholders (URLs are pasted later in Admin → Offer Links; never overwritten here).
+  for (const o of batch1OfferLinks) {
+    await prisma.offerLink.upsert({ where: { key: o.key }, update: {}, create: { ...o, network: "MyLead" } });
   }
 
   const counts = await Promise.all([prisma.page.count(), prisma.landingPage.count(), prisma.article.count()]);

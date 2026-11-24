@@ -1,3 +1,4 @@
+import { liveArticleWhere } from "@/lib/articles";
 import Link from "next/link";
 import { prisma } from "@/lib/db";
 import { CATEGORIES } from "@/lib/categories";
@@ -9,7 +10,7 @@ export default async function ArticlesPage({ searchParams }: { searchParams: Pro
   const { category } = await searchParams;
   const valid = CATEGORIES.some((c) => c.slug === category);
   const articles = await prisma.article.findMany({
-    where: { status: "published", ...(valid ? { category } : {}) },
+    where: { ...liveArticleWhere(), ...(valid ? { category } : {}) },
     orderBy: { publishedAt: "desc" },
   });
   return (

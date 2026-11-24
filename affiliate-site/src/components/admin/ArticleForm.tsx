@@ -7,6 +7,20 @@ import { slugify } from "@/lib/utils";
 import { Section } from "./ui";
 import { Field, MarkdownEditor, Toggle } from "./fields";
 
+function toLocalInput(iso?: string) {
+  if (!iso) return "";
+  const d = new Date(iso);
+  const pad = (n: number) => String(n).padStart(2, "0");
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+}
+
+function scheduleHint(iso?: string) {
+  if (!iso) return "Empty = goes live as soon as you publish.";
+  return new Date(iso).getTime() > Date.now()
+    ? `Scheduled: goes live automatically on ${new Date(iso).toLocaleString()} (your time) once published.`
+    : "Date is in the past, so it shows as live once published.";
+}
+
 export function ArticleForm({ initial }: { initial: ArticlePayload }) {
   const [d, setD] = useState(initial);
   const [msg, setMsg] = useState<{ ok: boolean; text: string } | null>(null);
@@ -21,7 +35,7 @@ export function ArticleForm({ initial }: { initial: ArticlePayload }) {
       const res = await saveArticle(payload);
       if (res.ok) {
         setD(payload);
-        setMsg({ ok: true, text: status === "published" ? "Published." : "Draft saved." });
+        setMsg({ ok: true, text: status !== "published" ? "Draft saved." : payload.publishedAt && new Date(payload.publishedAt).getTime() > Date.now() ? "Scheduled." : "Published." });
         if (!d.id) router.replace(`/admin/articles/${res.id}`);
         else router.refresh();
       } else setMsg({ ok: false, text: res.error });
@@ -44,6 +58,9 @@ export function ArticleForm({ initial }: { initial: ArticlePayload }) {
             <Field label="Category">
               <select className="input" value={d.category} onChange={(e) => set("category", e.target.value)}>{CATEGORIES.map((c) => <option key={c.slug} value={c.slug}>{c.longName}</option>)}</select>
             </Field>
+            <Field label="Publish date & time" hint={scheduleHint(d.publishedAt)}>
+              <input type="datetime-local" className="input" value={toLocalInput(d.publishedAt)} onChange={(e) => set("publishedAt", e.target.value ? new Date(e.target.value).toISOString() : "")} />
+            </Field>
             <Toggle checked={d.featured} onChange={(v) => set("featured", v)} label="Featured" />
           </Section>
           <Section title="SEO">
@@ -59,10 +76,10 @@ export function ArticleForm({ initial }: { initial: ArticlePayload }) {
       </div>
       <div className="fixed inset-x-0 bottom-0 z-30 border-t border-line bg-white/95 backdrop-blur md:left-[230px]">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-3 sm:px-8">
-          <p className={`text-sm ${msg ? (msg.ok ? "text-green-700" : "text-red-600") : "text-ink-mute"}`}>{msg?.text ?? (d.status === "published" ? "Published" : "Draft")}</p>
+          <p className={`text-sm ${msg ? (msg.ok ? "text-green-700" : "text-red-600") : "text-ink-mute"}`}>{msg?.text ?? (d.status !== "published" ? "Draft" : d.publishedAt && new Date(d.publishedAt).getTime() > Date.now() ? "Scheduled" : "Published")}</p>
           <div className="flex gap-2">
             <button type="button" className="btn-outline" disabled={pending} onClick={() => save("draft")}>Save draft</button>
-            <button type="button" className="btn-primary" disabled={pending} onClick={() => save("published")}>{pending ? "Saving…" : d.status === "published" ? "Update" : "Publish"}</button>
+            <button type="button" className="btn-primary" disabled={pending} onClick={() => save("published")}>{pending ? "Saving…" : d.publishedAt && new Date(d.publishedAt).getTime() > Date.now() ? "Schedule" : d.status === "published" ? "Update" : "Publish"}</button>
           </div>
         </div>
       </div>

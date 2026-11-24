@@ -1,3 +1,4 @@
+import { liveArticleWhere } from "@/lib/articles";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
@@ -9,12 +10,24 @@ import { DisclosureBanner } from "@/components/DisclosureBanner";
 import { Markdown } from "@/components/Markdown";
 import { Toc } from "@/components/Toc";
 import { ArticleCard } from "@/components/ArticleCard";
+import { cookies } from "next/headers";
+import { SESSION_COOKIE, verifySessionToken } from "@/lib/auth";
+import { isLive } from "@/lib/articles";
+import { getOfferLinkMap } from "@/lib/offer-links";
 
 type Props = { params: Promise<{ slug: string }> };
 
+async function isAdmin() {
+  const store = await cookies();
+  return Boolean(await verifySessionToken(store.get(SESSION_COOKIE)?.value));
+}
+
+/** Public sees only live articles; logged-in admins can preview drafts and scheduled posts. */
 async function load(slug: string) {
   const a = await prisma.article.findUnique({ where: { slug } });
-  return a && a.status === "published" ? a : null;
+  if (!a) return null;
+  if (isLive(a)) return a;
+  return (await isAdmin()) ? a : null;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -24,6 +37,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: a.metaTitle || a.title,
     description: a.metaDescription || a.excerpt,
     alternates: { canonical: `/articles/${a.slug}` },
+    robots: isLive(a) ? undefined : { index: false, follow: false },
     openGraph: { type: "article", title: a.metaTitle || a.title, description: a.metaDescription || a.excerpt, publishedTime: a.publishedAt?.toISOString(), modifiedTime: a.updatedAt.toISOString() },
   };
 }
@@ -31,9 +45,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function ArticlePage({ params }: Props) {
   const article = await load((await params).slug);
   if (!article) notFound();
-  const { html, toc } = renderMarkdown(article.content);
+  const { html, toc } = renderMarkdown(article.content, await getOfferLinkMap());
   const related = await prisma.article.findMany({
-    where: { status: "published", category: article.category, NOT: { id: article.id } },
+    where: { ...liveArticleWhere(), category: article.category, NOT: { id: article.id } },
     orderBy: { publishedAt: "desc" },
     take: 3,
   });
@@ -49,6 +63,13 @@ export default async function ArticlePage({ params }: Props) {
 
   return (
     <>
+      {!isLive(article) && (
+        <div className="bg-ink py-2 text-center text-xs font-medium text-white">
+          {article.status === "published" && article.publishedAt
+            ? `Scheduled preview: goes live ${article.publishedAt.toUTCString()}. Only visible to logged-in admins.`
+            : "Draft preview: only visible to logged-in admins."}
+        </div>
+      )}
       <DisclosureBanner />
       <article className="container-page py-12">
         <header className="mx-auto max-w-3xl">

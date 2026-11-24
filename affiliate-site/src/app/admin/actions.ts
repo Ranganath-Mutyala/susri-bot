@@ -193,6 +193,8 @@ export type ArticlePayload = {
   authorName: string;
   authorRole: string;
   authorBio: string;
+  /** ISO date-time. Empty = publish now (when status is published). A future date schedules the post. */
+  publishedAt?: string;
 };
 
 export async function saveArticle(input: ArticlePayload): Promise<Result> {
@@ -205,6 +207,8 @@ export async function saveArticle(input: ArticlePayload): Promise<Result> {
   if (clash) return { ok: false, error: `The slug "${slug}" is already in use.` };
 
   const existing = input.id ? await prisma.article.findUnique({ where: { id: input.id } }) : null;
+  const chosenDate = input.publishedAt ? new Date(input.publishedAt) : null;
+  if (chosenDate && Number.isNaN(chosenDate.getTime())) return { ok: false, error: "Invalid publish date." };
   const status = input.status === "published" ? "published" : "draft";
   const data = {
     slug,
@@ -220,7 +224,7 @@ export async function saveArticle(input: ArticlePayload): Promise<Result> {
     authorName: input.authorName.trim() || "Editorial Team",
     authorRole: input.authorRole.trim(),
     authorBio: input.authorBio.trim(),
-    publishedAt: status === "published" ? existing?.publishedAt ?? new Date() : existing?.publishedAt ?? null,
+    publishedAt: chosenDate ?? (status === "published" ? existing?.publishedAt ?? new Date() : existing?.publishedAt ?? null),
   };
   const saved = input.id
     ? await prisma.article.update({ where: { id: input.id }, data })
@@ -309,4 +313,32 @@ export async function deleteMessage(formData: FormData) {
   await requireAdmin();
   await prisma.contactMessage.delete({ where: { id: String(formData.get("id")) } }).catch(() => null);
   revalidatePath("/admin/messages");
+}
+
+/* ------------------------------------------------------------------ */
+/* Offer links (used in articles as [text](offer:key))                 */
+/* ------------------------------------------------------------------ */
+
+export async function saveOfferLink(_prev: unknown, formData: FormData): Promise<{ ok: boolean; message: string }> {
+  await requireAdmin();
+  const key = slugify(String(formData.get("key") ?? "")).replace(/-/g, "");
+  const url = String(formData.get("url") ?? "").trim();
+  const label = String(formData.get("label") ?? "").trim();
+  const campaignId = String(formData.get("campaignId") ?? "").trim();
+  const notes = String(formData.get("notes") ?? "").trim();
+  if (!key) return { ok: false, message: "Key is required (letters and numbers only, e.g. nordvpn)." };
+  if (url && !isHttpUrl(url)) return { ok: false, message: "Tracking link must start with https://" };
+  await prisma.offerLink.upsert({
+    where: { key },
+    update: { url, label, campaignId, notes },
+    create: { key, url, label, campaignId, notes },
+  });
+  revalidatePath("/", "layout");
+  return { ok: true, message: url ? `Saved: offer:${key} is live in all articles.` : `Saved offer:${key} (no link yet; text shows without a link).` };
+}
+
+export async function deleteOfferLink(formData: FormData) {
+  await requireAdmin();
+  await prisma.offerLink.delete({ where: { id: String(formData.get("id")) } }).catch(() => null);
+  revalidatePath("/admin/offer-links");
 }

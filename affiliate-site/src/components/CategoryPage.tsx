@@ -1,3 +1,4 @@
+import { liveArticleWhere } from "@/lib/articles";
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/db";
 import { getCategory } from "@/lib/categories";
@@ -9,7 +10,7 @@ export async function CategoryPage({ slug }: { slug: string }) {
   if (!cat) notFound();
   const [offers, articles] = await Promise.all([
     prisma.landingPage.findMany({ where: { category: slug, status: "published" }, orderBy: { updatedAt: "desc" } }),
-    prisma.article.findMany({ where: { category: slug, status: "published" }, orderBy: { publishedAt: "desc" } }),
+    prisma.article.findMany({ where: { category: slug, ...liveArticleWhere() }, orderBy: { publishedAt: "desc" } }),
   ]);
   return (
     <>
