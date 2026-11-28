@@ -12,7 +12,7 @@ import { Toc } from "@/components/Toc";
 import { ArticleCard } from "@/components/ArticleCard";
 import { cookies } from "next/headers";
 import { SESSION_COOKIE, verifySessionToken } from "@/lib/auth";
-import { isLive } from "@/lib/articles";
+import { isLive, articleDates } from "@/lib/articles";
 import { getOfferLinkMap } from "@/lib/offer-links";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -38,7 +38,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: a.metaDescription || a.excerpt,
     alternates: { canonical: `/articles/${a.slug}` },
     robots: isLive(a) ? undefined : { index: false, follow: false },
-    openGraph: { type: "article", title: a.metaTitle || a.title, description: a.metaDescription || a.excerpt, publishedTime: a.publishedAt?.toISOString(), modifiedTime: a.updatedAt.toISOString() },
+    openGraph: { type: "article", title: a.metaTitle || a.title, description: a.metaDescription || a.excerpt, publishedTime: articleDates(a).published.toISOString(), modifiedTime: articleDates(a).modified.toISOString() },
   };
 }
 
@@ -51,13 +51,14 @@ export default async function ArticlePage({ params }: Props) {
     orderBy: { publishedAt: "desc" },
     take: 3,
   });
+  const dates = articleDates(article);
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: article.title,
     description: article.excerpt,
-    datePublished: article.publishedAt?.toISOString(),
-    dateModified: article.updatedAt.toISOString(),
+    datePublished: dates.published.toISOString(),
+    dateModified: dates.modified.toISOString(),
     author: { "@type": "Organization", name: article.authorName },
   };
 
@@ -80,7 +81,8 @@ export default async function ArticlePage({ params }: Props) {
           <h1 className="mt-4 font-serif text-4xl font-bold leading-tight tracking-tight sm:text-5xl">{article.title}</h1>
           <p className="mt-4 text-lg leading-8 text-ink-soft">{article.excerpt}</p>
           <p className="mt-5 text-sm text-ink-mute">
-            By <span className="font-medium text-ink">{article.authorName}</span> · Updated {formatDate(article.updatedAt)} · {readingTime(article.content)} min read
+            By <span className="font-medium text-ink">{article.authorName}</span> · Published {formatDate(dates.published)}
+            {dates.wasEdited && <> · Updated {formatDate(dates.modified)}</>} · {readingTime(article.content)} min read
           </p>
         </header>
 
